@@ -1,0 +1,46 @@
+Table administradora {
+  id int [primary key]
+  nome varchar
+}
+
+Table condominio {
+  id int [primary key]
+  id_administradora int
+  nome varchar
+  endereco varchar
+  situacao bit
+}
+
+Table pessoa {
+  id int [primary key]
+  nome_completo varchar
+  cpf char[11] [unique]
+}
+
+Table unidade {
+  id int [primary key]
+  id_condominio int
+  bloco int
+  numero int
+  metros_quadrados int
+  comodos int
+}
+
+Table propriedade {
+  id int [primary key]
+  id_pessoa int
+  id_unidade int
+}
+
+Table aluguel {
+  id int [primary key]
+  id_unidade int
+  id_pessoa int
+}
+
+Ref: administradora.id > condominio.id_administradora
+Ref: condominio.id > unidade.id_condominio
+Ref: pessoa.id > propriedade.id_pessoa
+Ref: unidade.id > propriedade.id_unidade
+Ref: pessoa.id > aluguel.id_pessoa
+Ref: unidade.id > aluguel.id_unidade
